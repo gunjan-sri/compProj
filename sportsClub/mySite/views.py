@@ -1,57 +1,35 @@
 from django.shortcuts import render
 import csv
 
-
 # Create your views here.
-def basketball(request):
-    return render(request, "basketball.html")
+def basketball(reuqest):
+    if request.method=="POST":
+        dict1=request.POST
+        with open("basketball.csv","a") as csvfile:
+            wrt=csv.writer(csvfile)
+            for key, value in dict1.items():
+                wrt.writerow([key,value])
+
+    return render(reuqest,"baskteball.html")
 
 def badminton(request):
-    return render(request, "badminton.html")
+    if request.method=="POST":
+        dict1=request.POST
+        with open("badminton.csv","a") as csvfile:
+            wrt=csv.writer(csvfile)
+            for key, value in dict1.items():
+                wrt.writerow([key,value])
+
+    return render(reuqest,"badminton.html")
 
 def dance(request):
-    return render(request, "dance.html")
+    if request.method=="POST":
+        dict1=request.POST
+        with open("dance.csv","a") as csvfile:
+            wrt=csv.writer(csvfile)
+            for key, value in dict1.items():
+                wrt.writerow([key,value])
 
-def faq(request):
-    return render(request, "faq.html")
-
-def fees(request):
-    return render(request, "fees.html")
-
-def food(request):
-    return render(request, "food.html")
-
-def gym(request):
-    return render(request, "gym.html")
-
-def gymnastics(request):
-    return render(request, "gymnastics.html")
-
-def homepage(request):
-    return render(request, "homepage.html")
-
-def lawntennis(request):
-    return render(request, "lawntennis.html")
-
-def login(request):
-    return render(request, "login.html")
-
-def signup(request):
-    return render(request, "signup.html")
-
-def squash(request):
-    return render(request, "squash.html")
-
-def swimming(request):
-    return render(request, "swimming.html")
-
-def tabletennis(request):
-    return render(request, "tabletennis.html")
+    return render(reuqest,"baskteball.html")
 
 
-
-
-
-   
-
-   
