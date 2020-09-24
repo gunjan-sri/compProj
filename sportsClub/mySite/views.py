@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import csv
+
 # Create your views here.
 def basketball(reuqest):
     if request.method=="POST":
@@ -30,6 +31,5 @@ def dance(request):
                 wrt.writerow([key,value])
 
     return render(reuqest,"baskteball.html")
-
 
 
