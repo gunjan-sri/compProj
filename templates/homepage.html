@@ -1,8 +1,9 @@
 <html>
 
 <head>
+    {%load static %}
     <!-- CSS only -->
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="{% static main.css %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- JS, Popper.js, and jQuery -->
@@ -15,53 +16,54 @@
 
 <body>
 
-    <img src="orangelogo.JPG" class="leftpic" align="left" width="150px" height="140|
+
+    <img src="{% static 'orangelogo.JPG' %} " class="leftpic" align="left" width="150px" height="140|
     
     
     
     
     px">
-    <img src="orangelogo.JPG" class="rightpic" align="right" width="150px" height="140px">
-    <div class="title">
-        <h1 style="font-size:8vw">
+    <img src="{% static 'orangelogo.JPG' %}" " class="rightpic " align="right " width="150px " height="140px ">
+    <div class="title ">
+        <h1 style="font-size:8vw ">
             <font size=>OLYMPIA</font>
         </h1>
     </div>
-    <font size="2" face="Times New Roman">
+    <font size="2 " face="Times New Roman ">
 
-        <nav class="navbar navbar-dark bg-dark">
-
-
-            <a class="navbar-brand" href="homepage.html">Home</a>
-            <a class="navbar-brand" href="gym.html"> Gym</a>
+        <nav class="navbar navbar-dark bg-dark ">
 
 
-            <a class="navbar-brand" href="basketball.html">Basketball</a>
+            <a class="navbar-brand " href="homepage.html ">Home</a>
+            <a class="navbar-brand " href="{% static 'gym.html '} "> Gym</a>
+
+
+            <a class="navbar-brand " href='{% static "basketball.html " %}''>Basketball</a>
 
 
 
-            <a class="navbar-brand" href="#" id="tbDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="navbar-brand " href="# " id="tbDropdown " role="button " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false ">
             Tennis
           </a>
-            <div class="dropdown-menu" aria-labelledby="tbDropdown">
-                <a class="dropdown-item" href="tabletennis.html">Table Tennis</a>
-                <a class="dropdown-item" href="lawntennis.html">Lawn Tennis</a>
+            <div class="dropdown-menu " aria-labelledby="tbDropdown ">
+                <a class="dropdown-item " href="tabletennis.html ">Table Tennis</a>
+                <a class="dropdown-item " href="lawntennis.html ">Lawn Tennis</a>
             </div>
-            <a class="navbar-brand" href="badminton.html">Badminton</a>
-            <a class="navbar-brand" href="squash.html">Squash</a>
-            <a class="navbar-brand" href="swimming.html">Swimming</a>
-            <a class="navbar-brand" href="gymnastics.html">Gymnastics</a>
-            <a class="navbar-brand" href="dance.html">Dance Studio</a>
-            <a class="navbar-brand" href="food.html">Dining</a>
-            <a class="navbar-brand" href="login.html">Login</a>
-            <a class="navbar-brand" href="signup.html" ">Sign Up</a>
-            <a class="navbar-brand " href="fees.html ">Fees</a>
-            <a class="navbar-brand " href="faq.html ">FAQ</a>
+            <a class="navbar-brand " href="badminton.html ">Badminton</a>
+            <a class="navbar-brand " href="squash.html ">Squash</a>
+            <a class="navbar-brand " href="swimming.html ">Swimming</a>
+            <a class="navbar-brand " href="gymnastics.html ">Gymnastics</a>
+            <a class="navbar-brand " href="dance.html ">Dance Studio</a>
+            <a class="navbar-brand " href="food.html ">Dining</a>
+            <a class="navbar-brand " href="login.html ">Login</a>
+            <a class="navbar-brand " href="signup.html " ">Sign Up</a>
+    <a class="navbar-brand " href="fees.html ">Fees</a>
+    <a class="navbar-brand " href="faq.html ">FAQ</a>
 
 
 
 
-        </nav>
+    </nav>
     </font>
     <div id="carouselExampleControls " class="carousel slide " data-ride="carousel ">
         <div class="carousel-inner ">
