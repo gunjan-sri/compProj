@@ -4,7 +4,7 @@ from django.contrib import auth
 
 
 # Create your views here.
-def signup(request):
+def signupView(request):
     if request.method=='POST':
         if request.POST['password1']==request.POST['password2']:
             try:
