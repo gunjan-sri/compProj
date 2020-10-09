@@ -1,0 +1,83 @@
+<head>
+    {%load static %}
+    <!-- CSS only -->
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+    <title> olympia </title>
+</head>
+
+<body>
+
+    <div class="leftpic">
+
+
+        <img src="{% static 'orangelogo.JPG' %} " align="left" class="leftpic" width="150px" height="140px">
+    </div>
+
+    <div class="rightpic">
+        <img src="{% static 'orangelogo.JPG' %}" align="right" class="rightpic " width="150px " height="140px ">
+    </div>
+    <div class="title ">
+        <h1 style="font-size:8vw ">
+            <font size=>OLYMPIA</font>
+        </h1>
+    </div>
+
+    <font size="2 " face="Times New Roman ">
+
+        <nav class="navbar navbar-dark bg-dark ">
+
+
+            <a class="navbar-brand " href="homepage.html ">Home</a>
+            <a class="navbar-brand " href="{% static 'gym.html '} "> Gym</a>
+
+
+            <a class="navbar-brand " href='{% static "basketball.html " %}'>Basketball</a>
+
+
+
+            <a class="navbar-brand " href="# " id="tbDropdown " role="button " data-toggle="dropdown " aria-haspopup="true " aria-expanded="false ">
+            Tennis
+          </a>
+            <div class="dropdown-menu " aria-labelledby="tbDropdown ">
+                <a class="dropdown-item " href="tabletennis.html ">Table Tennis</a>
+                <a class="dropdown-item " href="lawntennis.html ">Lawn Tennis</a>
+            </div>
+            <a class="navbar-brand " href="badminton.html ">Badminton</a>
+            <a class="navbar-brand " href="squash.html ">Squash</a>
+            <a class="navbar-brand " href="swimming.html ">Swimming</a>
+            <a class="navbar-brand " href="gymnastics.html ">Gymnastics</a>
+            <a class="navbar-brand " href="dance.html ">Dance Studio</a>
+            <a class="navbar-brand " href="food.html ">Dining</a>
+            <a class="navbar-brand " href="login.html ">Login</a>
+            <a class="navbar-brand " href="signup.html " ">Sign Up</a>
+        <a class="navbar-brand " href="fees.html ">Fees</a>
+        <a class="navbar-brand " href="faq.html ">FAQ</a>
+
+
+
+
+        </nav>
+        </font>
+
+        {% block content %}
+        {% endblock %}
+
+        <div class="contact ">
+            To Contact Us: <br><br>Telephone:09037847587
+            <br> <br>Email: olympiasportinfo@olympia.com<br><br><br> Social Media:<br><br> Instagram/Twitter/Facebook:olympiasports
+
+            <br>
+            <br>
+            <br>
+            <br> Address:<br><br> 5-67 Taj Mahal Road, Mumbai
+
+
+
+        </div>

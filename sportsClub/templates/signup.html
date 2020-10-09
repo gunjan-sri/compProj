@@ -1,28 +1,38 @@
 <html>
+{% extends 'base.html' %} {% block content %} {% if error %} {{ error }}
+<br>
+<br> {% endif %}
 
-<head>
-    <!-- CSS only -->
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<h1> Sign Up</h1>
 
-    <!-- JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-    <title>
-        Sign Up
+<form method="POST">
+    {%csrf_token %} Username:
+    <br>
 
-    </title>
-</head>
-
-<body>
-    <h2> Sign Up Form</h2>
-
-    <form method="POST">
-        {% csrf_token %} {%for field in form%}
-
-    </form>
-
-</body>
+    <input type="text" class="form-control" name="username">
+    <br> <br>Email:
+    <br>
+    <input type="email" class="form-control" name="Last_Name" placeholder="example@domain.com">
+    <br><br> First Name:
+    <br>
+    <input type="text" class="form-control" name="firstname">
+    <br><br> Last Name:
+    <br>
+    <input type="text" class="form-control" name="lastname">
+    <br><br>Address:
+    <br>
+    <input type="text" class="form-control" name="address">
+    <br></r>Date of Birth:
+    <br>
+    <input type="text" class="form-control" name="DOB" placeholder="YYYY-MM-DD">
+    <br><br>Password:
+    <br>
+    <input type="text" class="form-control" name="password1">
+    <br><br>Confirm Password:
+    <br>
+    <input type="text" class="form-control" name="password2">
+    <input type="submit" value="Enter" class="btn btn-primary">
+</form>
+{% endblock %}
 
 </html>
