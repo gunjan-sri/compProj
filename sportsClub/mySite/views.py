@@ -4,9 +4,8 @@ from .models import *
 
 # Create your views here.
 
-def homepage(request):
+def homepageView(request):
     return render(request, 'homepage.html')
 
-
-def tabletennis(request):
+def tabletennisView(request):
     return render(request, 'tabletennis.html')
