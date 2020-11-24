@@ -17,3 +17,15 @@ def signupView(request):
 
     else:
         return render(request, 'signup.html')
+
+def loginView(request):
+    if request.method=='POST':
+        user=auth.authenticate(username=request.POST['username'], password=request.POST['password'])
+        if user is not None:
+            auth.login(request, user)
+            return redirect('mySite/homepage.html')
+        else:
+            return render(request, 'accounts/login.html', {'error':'the username or password is incorrect'})
+    else:
+        return render(request, 'login.html') 
+        
