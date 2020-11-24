@@ -29,3 +29,8 @@ def loginView(request):
     else:
         return render(request, 'login.html') 
         
+def logout(request):
+    if request.method=='POST'
+    auth.logout(request)
+    return render(request, 'mySite/homepage.html')
+
