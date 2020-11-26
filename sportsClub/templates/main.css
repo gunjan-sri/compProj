@@ -1,8 +1,8 @@
-.title {
-    color: black;
+.olympia {
+    color: grey;
     text-align: center;
     font-size: 40vw;
-    -webkit-text-stroke: 1px #FF9666;
+    -webkit-text-stroke: 1px whitesmoke;
 }
 
 .gymtitle {

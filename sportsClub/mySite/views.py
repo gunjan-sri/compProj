@@ -12,7 +12,8 @@ def homepageView(request):
 def tabletennisView(request):
     return render(request, 'tabletennis.html')
 
-
+def foodView(request):
+    return render(request, 'food.html')
 
 
 
@@ -41,8 +42,9 @@ def loginView(request):
     else:
         return render(request, 'login.html') 
         
-def logout(request):
-    if request.method=='POST'
-    auth.logout(request)
-    return render(request, 'mySite/homepage.html')
+def logoutView(request):
+    if request.method=='POST':
+        auth.logout(request)
+        return redirect('home')
+    return render(request, 'mySite/signup.html')
 
