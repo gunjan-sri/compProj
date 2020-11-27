@@ -5,6 +5,11 @@
     -webkit-text-stroke: 1px whitesmoke;
 }
 
+.sports {
+    color: pink;
+    font-size: 20vw;
+}
+
 .gymtitle {
     font-size: 50px;
     -webkit-text-stroke: 1px #FF9666;
