@@ -5,17 +5,39 @@ from .models import *
 
 
 # Create your views here.
-
+# Homepage View
 def homepageView(request):
     return render(request, 'homepage.html')
+
+
+    #Sports Views 
 
 def tabletennisView(request):
     return render(request, 'tabletennis.html')
 
-def foodView(request):
-    return render(request, 'food.html')
+def badmintonView(request):
+    return render(request, 'badminton.html')
+
+def squashView(request):
+    return render(request, 'squash.html')
+
+def tennisView(request):
+    return render(request, 'tennis.html')
+
+def gymView(request):
+    return render(request, 'gym.html')
 
 
+  #Extras Views
+def faqView(request):
+    return render(request, 'faq.html')
+
+def feesView(request):
+    return render(request, 'fees.html')
+
+
+
+#Signup, Login and Logout Views
 
 def signupView(request):
     if request.method=='POST':

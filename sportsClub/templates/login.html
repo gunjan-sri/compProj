@@ -3,21 +3,30 @@
 <br>
 <br> {% endif %}
 
-<h1> Login</h1>
+<div class="pagetitle"><b>Login</b></div>
 
 <body>
-    <form method="POST">
-        {%csrf_token %} Username:
-        <br>
+    <table align="center" border="3px">
 
-        <input type="text" class="form-control" name="username">
+        <tr>
+            <td width="700">
+                <form method="POST">
+                    {%csrf_token %} Username:
+                    <br>
 
-        <br><br>Password:
-        <br>
-        <input type="text" class="form-control" name="password">
-        <input type="submit" value="Enter" class="btn btn-primary">
-    </form>
-    {% endblock %}
+                    <input type="text" class="form-control" name="username">
+
+                    <br><br>Password:
+                    <br>
+                    <input type="text" class="form-control" name="password">
+                    <br>
+                    <center><input type="submit" value="Enter" class="btn btn-primary"></center>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <br><br><br> {% endblock %}
 
 </body>
 

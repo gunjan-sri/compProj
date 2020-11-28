@@ -1,13 +1,13 @@
 .olympia {
-    color: gray;
-    text-align: center;
+    color: whitesmoke;
     font-size: 40vw;
     -webkit-text-stroke: 1px whitesmoke;
+    background-color: black;
 }
 
 .sports {
     color: pink;
-    font-size: 20vw;
+    font-size: 6vw;
 }
 
 .gymtitle {
@@ -38,47 +38,19 @@
 
 .homepara {
     color: black;
-    font-style: italic;
+    font-style: bold;
     text-align: center;
     font-weight: bold;
-    font-family: georgia;
-    font-size: 30px;
+    font-family: 'Times New Roman';
+    font-size: 25px;
 }
 
-.contact {
-    border: rgb(235, 235, 235);
-    background-color: rgb(235, 235, 235);
-    font-size: 14px;
+.pagetitle {
     color: black;
-    padding-left: 30px;
-    font-weight: bold;
-}
-
-.tbtitle {
-    font-size: 50px;
-    -webkit-text-stroke: 1px #FF9666;
-}
-
-.tbhead {
-    color: black;
-    font-family: Georgia;
-    font-size: 20px;
-    text-align: left;
-    font-weight: bold;
-    padding-left: 20px;
-}
-
-.tbtimings {
-    color: black;
-    font-family: Georgia;
-    font-style: italic;
+    -webkit-text-stroke: 1px pink;
+    font-size: 60px;
+    font-family: 'Courier New', Courier, monospace;
     text-align: center;
-    width: 300px;
-    border: 5px solid black;
-    padding: 50px;
-    margin: 20px;
-    font-weight: bold;
-    border-style: inset;
 }
 
 .register {

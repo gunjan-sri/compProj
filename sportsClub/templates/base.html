@@ -17,38 +17,40 @@
 
 <body>
 
-    <div class="olympia ">
+    <div class="olympia">
         <h1 style="font-size:8vw ">
-            <font>OLYMPIA</font>
+            OLYMPIA
+            <font style="font-size: 5vw" color=pink>sports center</font>
+
+
+
         </h1>
-        <div class="sports"> sports center</div>
     </div>
 
     <font size="2 " face="Times New Roman ">
 
-        <nav class="navbar navbar-dark bg-dark ">
+        <nav class="navbar navbar-light bg-light" ">
 
 
             <a class="navbar-brand " href="{% url 'homepageView' %} ">Home</a>
-            <a class="navbar-brand " href="{% static 'gym.html '} "> Gym</a>
+            <a class="navbar-brand " href="{% url 'gymView' %} "> Gym</a>
 
 
-            <a class="navbar-brand " href='{% static "basketball.html " %}'>Basketball</a>
+            <a class="navbar-brand " href="{% static 'tennisView' %} ">Tennis</a>
 
-            <a class="navbar-brand " href="badminton.html ">Badminton</a>
+            <a class="navbar-brand " href="{% url 'squashView' %} ">Squash</a>
 
-            <a class="navbar-brand " href="swimming.html ">Swimming</a>
-            <a class="navbar-brand " href="gymnastics.html ">Table Tennis</a>
-            <a class="navbar-brand " href="dance.html ">Dance Studio</a>
-            <a class="navbar-brand " href="{% url 'foodView' %} ">Fees</a>
-            <a class="navbar-brand " href="faq.html ">FAQ</a> {% if user.is_authenticated %}
-            <a class="navbar-brand " href="javascript:{document.getElementByID( 'logout').submit()} " onclick=" ">Logout</a>
+            <a class="navbar-brand " href="{% url 'badmintonView' %} ">Badminton</a>
+            <a class="navbar-brand " href="{% url 'tabletennisView' %} ">Table Tennis</a>
+            <a class="navbar-brand " href="{% url 'feesView' %} ">Fees</a>
+            <a class="navbar-brand " href="{% url 'faqView' %} ">FAQ</a> {% if user.is_authenticated %}
+            <a class="navbar-brand " href="javascript:{document.getElementByID( 'logout ').submit()} " onclick=" ">Logout</a>
             <form id="logout " method="POST " action="{% url 'logoutView' %} ">
                 {% csrf_token %}
                 <input type="hidden " />
             </form>
             {% else %} {% endif %}
-            <a class="navbar-brand " href="login.html ">Login</a>
+            <a class="navbar-brand " href="{% url 'loginView' %} ">Login</a>
             <a class="navbar-brand " href="{% url 'signupView' %} ">Sign Up</a>
 
 
@@ -62,14 +64,34 @@
     {% block content %} {% endblock %}
 
     <div class="contact ">
-        To Contact Us: <br><br>Telephone:09037847587
-        <br> <br>Email: olympiasportinfo@olympia.com<br><br><br> Social Media:<br><br> Instagram/Twitter/Facebook:olympiasports
-
-        <br>
-        <br>
-        <br>
-        <br> Address:<br><br> 5-67 Taj Mahal Road, Mumbai
-
-
-
-    </div>
+        <table class="table table-borderless table-dark ">
+            <thead>
+              <tr>
+                <th scope="col "></th>
+                <th scope="col ">Contact</th>
+                <th scope="col ">Social Media</th>
+                <th scope="col ">Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row " width=100></th>
+                <td>Telephone: 365863547</td>
+                <td>Instagram: @olympiasports</td>
+                <td>Address: 5-6-7 Tej Mahal Road</td>
+              </tr>
+              <tr>
+                <th scope="row "></th>
+                <td>Email: contactolympia@olympiasports.com</td>
+                <td>Facebook: @olympiasportscenter</td>
+                <td></td>
+              </tr>
+              <tr>
+                <th scope="row "></th>
+                <td></td>
+                <td>Twitter: @olympiaspcenter </td>
+              </tr>
+            </tbody>
+          </table>
+        
+     </div>
