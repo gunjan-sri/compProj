@@ -1,11 +1,63 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="pagetitle"><b>Squash</b></div>
-<table>
+<br><br>
+<p align="center">
+    <font size="4" style="font-style: oblique;" face="Georgia"> Squash is a sport provided at Olympia which requires a reservation.<br> We have 5 different rooms along with a viewing area for anyone who wishes to watch.
+    </font>
+</p>
 
+<br><br><br>
+<font size="5">
+    <font color="pink" size="6">
+        <center> <b><u>Timings</u></b></center>
+    </font>
+    <table align="center">
+
+        <tr>
+            <td width="200"> <b>Weekdays</b></td>
+            <td width="250" height="100"> 7:00 AM to 7:00 PM</td>
+        </tr>
+        <tr>
+            <td width="200"> <b>Weekend</b></td>
+            <td width="250" height="100"> 7:00 AM to 7:00 PM</td>
+        </tr>
+        <tr>
+            <td width="200"> <b>Holidays</b></td>
+            <td width="250" height="100">7:00 AM to 7:00 PM</td>
+        </tr>
+
+    </table>
+</font>
+<br><br><br>
+<font size="5">
+    <center><b><u>Register</u></b> </center>
+</font>
+
+<table align="center" border="2px">
+    <tr>
+        <td width="600">
+            <form action="#" method="POST">
+                <label for="First_Name">First Name</label>
+                <input type="text" class="form-control" name="First_Name" placeholder="First Name">
+
+                <label for="Last_Name">Last Name</label>
+                <input type="text" class="form-control" name="Last_Name" placeholder="Last Name">
+
+                <label for="MemberID">Member ID</label>
+                <input type="text" class="form-control" name="MemberID" placeholder="Member ID">
+
+                <label for="R_Date">Registration Date</label>
+                <input type="text" class="form-control" name="R_Date" placeholder="YYYY-MM-DD">
+
+                <label for="R_Time">Registration Time</label>
+                <input type="time" class="form-control" name="R_Time">
+                <br>
+                <center><input type="submit" value="Register" class="btn btn-primary"></center>
+
+            </form>
+        </td>
+
+    </tr>
 </table>
-
-
-
-
-{% endblock %}
+<br><br><br> {% endblock %}

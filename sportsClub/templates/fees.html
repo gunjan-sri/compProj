@@ -1,0 +1,42 @@
+<html>
+{% extends 'base.html' %} {% block content %} {% if error %} {{ error }}
+<br>
+<br> {% endif %}
+
+
+<div class="pagetitle">
+    <b> Fees (per month)</b>
+</div>
+
+<body>
+
+    <table class="table-info" align="center" border="2px">
+
+        <tbody>
+            <tr>
+                <th scope="row">Adults</th>
+                <td></td>
+                <td width="250" height="50">6000 Rupees</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">Age 13 to 18</th>
+                <td></td>
+                <td width="250" height="50">4000 Rupees</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">13 and below</th>
+                <td></td>
+                <td width="250" height="50">1000 Rupees</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <br><br><br> {% endblock %}
+
+</body>
+
+</html>

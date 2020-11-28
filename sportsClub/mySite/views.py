@@ -76,9 +76,9 @@ def gymView(request):
     return render(request, 'gym.html')
 
 
+
+
   #Extras Views
-def faqView(request):
-    return render(request, 'faq.html')
 
 def feesView(request):
     return render(request, 'fees.html')
@@ -96,7 +96,7 @@ def signupView(request):
             except User.DoesNotExist:
                 user=User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 auth.login(request,user)
-                return redirect('mySite/homepage.html')
+                return redirect('homepageView')
 
     else:
         return render(request, 'signup.html')
@@ -106,14 +106,14 @@ def loginView(request):
         user=auth.authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             auth.login(request, user)
-            return redirect('mySite/homepage.html')
+            return redirect('homepage.html')
         else:
-            return render(request, 'accounts/login.html', {'error':'the username or password is incorrect'})
+            return render(request, 'login.html', {'error':'the username or password is incorrect'})
     else:
-        return render(request, 'login.html')
+        return render(request, 'homepage.html')
 
 def logoutView(request):
     if request.method=='POST':
         auth.logout(request)
-        return redirect('home')
-    return render(request, 'mySite/signup.html')
+        return redirect('homepage.html')
+    return render(request, 'homepage.html')
