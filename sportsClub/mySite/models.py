@@ -7,22 +7,40 @@ from django.db import models
 # TO apply the changes to the database - python3 manage.py migrate
 # Query: table.first(), all()
 
-class Members(models.Model):
-    firstName = models.CharField(max_length=20)
-    lastName = models.CharField(max_length=20)
-    #DOB = models.DateField()
-    email = models.CharField(max_length=50)
-    #address = models.CharField(max_length=100)
+from django.db import models
+
+from django.utils import timezone
+# Create your models here.
+
+class ClubMember(models.Model):
+    firstname = models.CharField(max_length=64)
+    lastname = models.CharField(max_length=64)
+    dob = models.DateField()
 
     def __str__(self):
-        return f"{self.firstName} {self.lastName} (id:{self.id3})"
+        return f"{self.firstname} {self.lastname}"
 
-class ttRegister(models.Model):
-    memID = models.ForeignKey(Members, on_delete=models.CASCADE, related_name='registrant')
-                # Means that if you delete a memID, it deletes all registered slots.
-    tableNo = models.IntegerField()
-    regDate = models.DateField()
-    regTime = models.TimeField()
+class TTTable(models.Model):
+
+    #tblName = models.CharField(max_length=15)
+
+    LOCATION_CHOICES = [('1', 'Floor 1'), ('2', 'Floor 2')]
+    tblLocation = models.CharField(max_length=2, choices=LOCATION_CHOICES, default='1')
+
+    TYPE_CHOICES = [('kids', 'Kids Table'), ('adult', 'Adult Table')]
+    tblType = models.CharField(max_length=5, choices=TYPE_CHOICES, default='adult')
+
+    isReserved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Table Number: {self.tableNo} by {self.memID} for {self.regDate} at {self.regTime}"
+        return f"Table {self.id} ({self.tblType}, {self.tblLocation})"
+
+
+class TTReservation(models.Model):
+    customer = models.ForeignKey(ClubMember, on_delete=models.CASCADE, related_name='reservations')
+    tableName = models.ForeignKey(TTTable, on_delete=models.CASCADE, related_name='tables')
+    resDate = models.DateField(default=timezone.now().date())
+    resTime = models.TimeField(default=timezone.now().time())
+
+    def __str__(self):
+        return f'Table {self.tableName.id}: {self.customer} ({self.resDate}, {self.resTime})'
