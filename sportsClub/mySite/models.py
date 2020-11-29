@@ -20,14 +20,14 @@ class Member(models.Model):
     password1=models.CharField(max_length=30)
     password2=models.CharField(max_length=30)
     birth_date=models.DateField(verbose_name="YYYY-M-DD")
-    email=models.EmailField(max_length=15)
+    email=models.EmailField(max_length=30)
     address=models.CharField(max_length=40)
     phone=models.IntegerField()
 
 class login(models.Model):
     username=models.CharField(max_length=25)
     password=models.CharField(max_length=30)
-"""
+
 class TTTable(models.Model):
 
     #tblName = models.CharField(max_length=15)
@@ -41,15 +41,13 @@ class TTTable(models.Model):
     isReserved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Table {self.id} ({self.tblType}, {self.tblLocation})"
-
+        return f" {self.tblType} table {self.id} on floor {self.tblLocation}"
 
 class TTReservation(models.Model):
     customer = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='reservations')
     tableName = models.ForeignKey(TTTable, on_delete=models.CASCADE, related_name='tables')
     resDate = models.DateField(default=timezone.now().date())
-    resTime = models.TimeField(default=timezone.now().time())
+    resTime = models.TimeField()
 
     def __str__(self):
         return f'Table {self.tableName.id}: {self.customer} ({self.resDate}, {self.resTime})'
-"""

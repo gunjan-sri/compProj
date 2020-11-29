@@ -38,11 +38,9 @@ class tabletennisForm(forms.ModelForm):
          super(tabletennisForm, self).__init__(*args, **kwargs)
 """
 class loginForm(forms.ModelForm):
-    username=forms.CharField( label='Username')
-    password=forms.CharField( label='Password')
+    username=forms.CharField(label='Username')
+    password=forms.CharField(label='Password')
 
     class Meta:
         model=login
         fields=['username','password']
-
-    

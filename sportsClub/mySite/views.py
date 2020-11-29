@@ -43,8 +43,8 @@ def tabletennisView(request):
     else:
         context = {'form': form}
         return render(request, 'tabletennis.html', context)
-
-    return render(request, 'tabletennis.html')
+    context = {'form': form}
+    return render(request, 'tabletennis.html', context)
 
 def badmintonView(request):
     return render(request, 'badminton.html')
@@ -136,11 +136,7 @@ def signupView(request):
                 context= {'form': form}
                 return render(request, 'signup.html', context)
 
-                """if request.POST['firstname'] and request.POST['lastname'] and request.POST['username'] and request.POST['birth_date'] and request.POST['address'] and request.POST['phone'] and request.post['password1']:
-                    
-                else:
-                    return render(request, 'signup.html', {'error':'Please try againn'})"""
-    
+               
 
         else:
             context={'form':form,'error':'The passwords that you provided do not match'}
@@ -153,6 +149,8 @@ def signupView(request):
 
     
         
+    
+
 
 
 def loginView(request):
@@ -174,13 +172,10 @@ def loginView(request):
     else:
         context={'form':form}
         return render(request, 'login.html', context)
-        
+
 def logoutView(request):
     if request.method=='POST':
         auth.logout(request)
         return redirect('thank.html')
-    
+
     return render(request, 'homepage.html')
-
-
-

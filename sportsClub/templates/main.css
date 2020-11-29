@@ -4,6 +4,11 @@
     -webkit-text-stroke: 1px whitesmoke;
     background-color: black;
 }
+.sportdescription {
+    font-size: 4px;
+    font-style: oblique;
+    font-family: Georgia;
+}
 
 .sports {
     color: pink;
