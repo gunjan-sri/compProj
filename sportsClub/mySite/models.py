@@ -24,6 +24,9 @@ class Member(models.Model):
     address=models.CharField(max_length=40)
     phone=models.IntegerField()
 
+class login(models.Model):
+    username=models.CharField(max_length=25)
+    password=models.CharField(max_length=30)
 """
 class TTTable(models.Model):
 

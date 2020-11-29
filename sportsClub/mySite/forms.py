@@ -1,5 +1,6 @@
 from django import forms
 from .models import Member
+from .models import login
 
 class signupForm(forms.ModelForm):
     username=forms.CharField(label='Username')
@@ -17,6 +18,10 @@ class signupForm(forms.ModelForm):
         fields=['firstname', 'lastname', 'username','birth_date', 'address', 'email', 'password1', 'password2']
 
 class loginForm(forms.ModelForm):
-    username=forms.CharField(max_length=25, label='Username')
-    password=forms.CharField(max_length=30, label='Password')
+    username=forms.CharField( label='Username')
+    password=forms.CharField( label='Password')
+
+    class Meta:
+        model=login
+        fields=['username','password']
 
