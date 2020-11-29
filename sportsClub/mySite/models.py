@@ -24,9 +24,14 @@ class Member(models.Model):
     address=models.CharField(max_length=40)
     phone=models.IntegerField()
 
-
+class login(models.Model):
+    username=models.CharField(max_length=25)
+    password=models.CharField(max_length=30)
+"""
 class TTTable(models.Model):
+
     #tblName = models.CharField(max_length=15)
+
     LOCATION_CHOICES = [('1', 'Floor 1'), ('2', 'Floor 2')]
     tblLocation = models.CharField(max_length=2, choices=LOCATION_CHOICES, default='1')
 
@@ -42,22 +47,7 @@ class TTReservation(models.Model):
     customer = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='reservations')
     tableName = models.ForeignKey(TTTable, on_delete=models.CASCADE, related_name='tables')
     resDate = models.DateField(default=timezone.now().date())
-    resTime = models.TimeField()
+    resTime = models.TimeField(default=timezone.now().time())
 
     def __str__(self):
         return f'Table {self.tableName.id}: {self.customer} ({self.resDate}, {self.resTime})'
-'''
-class BTCourt(models.Model):
-    LOCATION_CHOICES = [('out', 'Outdoor'), ('in', 'Indoor')]
-    crtLocation = models.CharField(max_length=3, choices=LOCATION_CHOICES)
-
-
-class BTReservation(models.Model):
-    BTcustomer = models.ForeignKey(Member, on_delete=models.CASCADE)
-    BTcourtName = models.ForeignKey(BTCourt, on_delete=models.CASCADE)
-    BTresDate = models.DateField(default=timezone.now().date())
-    BTresTime = models.TimeField()
-
-    def __str__(self):
-        return f'Table {self.tableName.id}: {self.customer} ({self.resDate}, {self.resTime})'
-'''
