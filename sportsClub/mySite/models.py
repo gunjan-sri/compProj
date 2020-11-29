@@ -25,7 +25,6 @@ class Member(models.Model):
     phone=models.IntegerField()
 
 
-"""
 class TTTable(models.Model):
     #tblName = models.CharField(max_length=15)
     LOCATION_CHOICES = [('1', 'Floor 1'), ('2', 'Floor 2')]
@@ -63,6 +62,3 @@ class BTReservation(models.Model):
         return f'Table {self.tableName.id}: {self.customer} ({self.resDate}, {self.resTime})'
 <<<<<<< HEAD
 '''
-=======
-"""
->>>>>>> ad5a543bda186e0e4e51936c7e400db4b29b3e43
