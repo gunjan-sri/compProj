@@ -15,7 +15,7 @@ class signupForm(forms.ModelForm):
     class Meta:
         model=Member
         fields=['firstname', 'lastname', 'username','birth_date', 'address', 'email', 'password1', 'password2']
-
+"""
 class tabletennisForm(forms.ModelForm):
     LOCS = [('kids', 'Kids Table'), ('adult', 'Adult Table')]
     tablename = forms.ChoiceField(choices=LOCS, label='Choose the type of table')
@@ -36,7 +36,7 @@ class tabletennisForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
          self.user = user
          super(tabletennisForm, self).__init__(*args, **kwargs)
-
+"""
 class loginForm(forms.ModelForm):
     username=forms.CharField( label='Username')
     password=forms.CharField( label='Password')

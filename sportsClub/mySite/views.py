@@ -115,6 +115,17 @@ def signupView(request):
             except User.DoesNotExist:
                 user=User.objects.create_user(uservalue,password= password1value,email=emailvalue, first_name=firstname, last_name=lastname)
                 user.save()
+                member=Member()
+                member.firstname=request.POST['firstname']
+                member.lastname=request.POST['lastname']
+                member.birth_date=request.POST['birth_date']
+                member.email=request.POST['email']
+                member.username=request.POST['username']
+                member.address=request.POST['address']
+                member.phone=request.POST['phone']
+                member.password1=request.POST['password1']
+                member.password2=request.POST['password2']
+                member.save()
 
 
                 login(request,user)
@@ -124,6 +135,11 @@ def signupView(request):
                 fs.save()
                 context= {'form': form}
                 return render(request, 'signup.html', context)
+
+                """if request.POST['firstname'] and request.POST['lastname'] and request.POST['username'] and request.POST['birth_date'] and request.POST['address'] and request.POST['phone'] and request.post['password1']:
+                    
+                else:
+                    return render(request, 'signup.html', {'error':'Please try againn'})"""
     
 
         else:
@@ -135,17 +151,7 @@ def signupView(request):
         return render(request, 'signup.html',context)
 
 
-    if request.POST['firstname'] and request.POST['lastname'] and request.POST['username'] and request.POST['birth_date'] and request.POST['address'] and request.POST['phone'] and request.post['password1']:
-        member=Member()
-        member.firstname=request.POST['firstname']
-        member.lastname=request.POST['lastname']
-        member.birth_date=request.POST['birth_date']
-        member.username=request.POST['username']
-        member.address=request.POST['address']
-        member.phone=request.POST['phone']
-        member.password=request.POST['password1']
-    else:
-        return render(request, 'signup.html', {'error':'Please try againn'})
+    
         
 
 
