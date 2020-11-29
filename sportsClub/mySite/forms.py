@@ -36,3 +36,7 @@ class tabletennisForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
          self.user = user
          super(tabletennisForm, self).__init__(*args, **kwargs)
+
+class loginForm(forms.ModelForm):
+    username=forms.CharField(max_length=25, label='Username')
+    password=forms.CharField(max_length=30, label='Password')

@@ -43,14 +43,14 @@
             <a class="navbar-brand " href="{% url 'badmintonView' %} ">Badminton</a>
             <a class="navbar-brand " href="{% url 'tabletennisView' %} ">Table Tennis</a>
             <a class="navbar-brand " href="{% url 'feesView' %} ">Fees</a> {% if user.is_authenticated %}
-            <a class="navbar-brand " href="javascript:{document.getElementByID( 'logout ').submit()} ">Logout</a>
-            <form id="logout " method="POST " action="{% url 'logoutView' %} ">
+            <a class="navbar-brand " href="{% url 'logoutView' %}" onClick="document.getElementById('logoutform').submit()">Logout</a>
+            <form id="logoutform" method="POST " action="{% url 'logoutView' %} ">
                 {% csrf_token %}
                 <input type="hidden" />
             </form>
-            {% else %}{% endif %}
+            {% else %}
             <a class="navbar-brand " href="{% url 'loginView' %} ">Login</a>
-            <a class="navbar-brand " href="{% url 'signupView' %} ">Sign Up</a>
+            <a class="navbar-brand " href="{% url 'signupView' %} ">Sign Up</a> {% endif %}
 
 
 

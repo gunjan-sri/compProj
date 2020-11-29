@@ -131,7 +131,7 @@ def signupView(request):
         return render(request, 'signup.html',context)
 
 
-def loginView(request):
+"""def loginView(request):
     if request.method=='POST':
         user=auth.authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
@@ -140,10 +140,35 @@ def loginView(request):
         else:
             return render(request, 'login.html', {'error':'the username or password is incorrect'})
     else:
-        return render(request, 'login.html')
+        return render(request, 'login.html')"""
 
+def loginView(request):
+    uservalue=''
+    passwordvalue=''
+    form=loginForm(request.POST)
+    if form.is_valid():
+        uservalue=form.cleaned_data.get('username')
+        passwordvalue=form.cleaned_data.get('password')
+
+        user=authenticate(username=uservalue, password=passwordvalue)
+        if user is not None:
+            login(request,user)
+            context= {'form': form, 'error': 'The login has been successful'}
+            return render(request, 'login.html', context)
+        else:
+            context={'form':form, 'error':'The username and password combination is incorrect'}
+            return render(request, 'login.html', context)
+    else:
+        context={'form':form}
+        return render(request, 'login.html', context)
+        
 def logoutView(request):
     if request.method=='POST':
         auth.logout(request)
         return redirect('homepage.html')
-    return render(request, 'homepage.html')
+    
+    return render(request, 'thank.html')
+
+def logged(request):
+    return render(request, 'thank.html')
+
