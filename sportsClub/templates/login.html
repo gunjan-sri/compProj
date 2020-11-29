@@ -10,18 +10,15 @@
 
         <tr>
             <td width="700">
-                <form method="POST" action="{% url 'signupView' %}">
-                    {%csrf_token %} Username:
-                    <br>
-
-                    <input type="text" class="form-control" name="username">
-
-                    <br><br>Password:
-                    <br>
-                    <input type="password" class="form-control" name="password">
-                    <br>
-                    <center><input type="submit" value="Enter" class="btn btn-primary"></center>
-                </form>
+                <form action="{url 'loginView' %}" method="POST" class="form-control>
+                    {% csrf_token %}
+                    {% if error %}
+                    {{ error }}
+                    {% endif %}
+                    {{ form.as_p }}
+                    <input type=" submit " name="submit " value="Log in "/>
+                    </form>
+                    
             </td>
         </tr>
     </table>

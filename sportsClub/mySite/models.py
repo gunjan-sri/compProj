@@ -22,9 +22,9 @@ class Member(models.Model):
     birth_date=models.DateField(verbose_name="YYYY-M-DD")
     email=models.EmailField(max_length=15)
     address=models.CharField(max_length=40)
-    phone=models.IntegerField(max_length=11)
+    phone=models.IntegerField()
 
-
+"""
 class TTTable(models.Model):
 
     #tblName = models.CharField(max_length=15)
@@ -49,3 +49,4 @@ class TTReservation(models.Model):
 
     def __str__(self):
         return f'Table {self.tableName.id}: {self.customer} ({self.resDate}, {self.resTime})'
+"""

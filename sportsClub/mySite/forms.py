@@ -16,3 +16,7 @@ class signupForm(forms.ModelForm):
         model=Member
         fields=['firstname', 'lastname', 'username','birth_date', 'address', 'email', 'password1', 'password2']
 
+class loginForm(forms.ModelForm):
+    username=forms.CharField(max_length=25, label='Username')
+    password=forms.CharField(max_length=30, label='Password')
+
