@@ -36,7 +36,7 @@ class TTTable(models.Model):
     isReserved = models.BooleanField(default=False)
 
     def __str__(self):
-        return f" {self.tblType} table {self.id} on floor {self.tblLocation})"
+        return f" {self.tblType} table {self.id} on floor {self.tblLocation}"
 
 class TTReservation(models.Model):
     customer = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='reservations')
@@ -60,5 +60,4 @@ class BTReservation(models.Model):
 
     def __str__(self):
         return f'Table {self.tableName.id}: {self.customer} ({self.resDate}, {self.resTime})'
-<<<<<<< HEAD
 '''
