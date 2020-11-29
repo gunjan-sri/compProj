@@ -13,33 +13,10 @@
 
         <tr>
             <td width="700">
-                <form method="POST">
-                    {%csrf_token %} Username:
-                    <br>
+                <form action="{% url 'signupView' %} " method="POST">
+                    {% csrf_token %} {% if error %} {{error}} {% endif %} {{ form.as_p }}
+                    <input type="submit" value="Sign Up" />
 
-                    <input type="text" class="form-control" name="username">
-                    <br> <br>Email:
-                    <br>
-                    <input type="email" class="form-control" name="Last_Name" placeholder="example@domain.com">
-                    <br><br> First Name:
-                    <br>
-                    <input type="text" class="form-control" name="firstname">
-                    <br><br> Last Name:
-                    <br>
-                    <input type="text" class="form-control" name="lastname">
-                    <br><br>Address:
-                    <br>
-                    <input type="text" class="form-control" name="address">
-                    <br></r>Date of Birth:
-                    <br>
-                    <input type="text" class="form-control" name="DOB" placeholder="YYYY-MM-DD">
-                    <br><br>Password:
-                    <br>
-                    <input type="text" class="form-control" name="password1">
-                    <br><br>Confirm Password:
-                    <br>
-                    <input type="text" class="form-control" name="password2">
-                    <input type="submit" value="Sign Up" class="btn btn-primary">
                 </form>
 
             </td>

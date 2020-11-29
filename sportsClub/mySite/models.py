@@ -12,13 +12,18 @@ from django.db import models
 from django.utils import timezone
 # Create your models here.
 
-class ClubMember(models.Model):
-    firstname = models.CharField(max_length=64)
-    lastname = models.CharField(max_length=64)
-    dob = models.DateField()
 
-    def __str__(self):
-        return f"{self.firstname} {self.lastname}"
+class Member(models.Model):
+    firstname=models.CharField (max_length=100)
+    lastname = models.CharField(max_length=100)
+    username=models.CharField(max_length=25)
+    password1=models.CharField(max_length=30)
+    password2=models.CharField(max_length=30)
+    birth_date=models.DateField(verbose_name="YYYY-M-DD")
+    email=models.EmailField(max_length=15)
+    address=models.CharField(max_length=40)
+    phone=models.IntegerField(max_length=11)
+
 
 class TTTable(models.Model):
 
@@ -37,7 +42,7 @@ class TTTable(models.Model):
 
 
 class TTReservation(models.Model):
-    customer = models.ForeignKey(ClubMember, on_delete=models.CASCADE, related_name='reservations')
+    customer = models.ForeignKey(Member, on_delete=models.CASCADE, related_name='reservations')
     tableName = models.ForeignKey(TTTable, on_delete=models.CASCADE, related_name='tables')
     resDate = models.DateField(default=timezone.now().date())
     resTime = models.TimeField(default=timezone.now().time())
