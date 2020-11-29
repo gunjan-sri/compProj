@@ -5,3 +5,5 @@ from .models import *
 admin.site.register(TTTable)
 admin.site.register(TTReservation)
 admin.site.register(Member)
+#admin.site.register(BTCourt)
+#admin.site.register(BTReservation)
