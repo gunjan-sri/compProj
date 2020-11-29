@@ -13,56 +13,36 @@ def homepageView(request):
     return render(request, 'homepage.html')
 
 
-    #Sports Views 
+    #Sports Views
 
 def tabletennisView(request):
-    tables = TTTable.objects.all()
+    form=tabletennisForm(request.user, request.POST)
+    if form.is_valid():
+        fs=form.save(commit=False)
+        # user = user.get
+        tableNameValue = form.cleaned_data.get('tablename')
+        resTimeValue=form.cleaned_data.get('restime')
+        resDateValue=form.cleaned_data.get('resdate')
 
-    for table in tables:
-        print(table)
-        if table.isReserved == True:
 
-            curRes = TTReservation.objects.get(tableName=table)
-            print(f'Current reservaton: {curRes}')
-
-            curTime = curRes.resTime # resTime = timezone.now().time()
-            curDate = curRes.resDate
-            delta = timedelta(hours=1)
-            addedTime = (datetime.combine(curDate, curTime)+delta).time()
-
-            if timezone.now().time() > addedTime:
-
-                print(f'Table saved is {table.isReserved}')
-                table.isReserved = False
-                table.save()
-                print(f'Table saved is {table.isReserved}')
-
-                curRes.delete()
-
-    if request.method == 'POST':
-        firstn = request.POST['customer-first']
-        lastn = request.POST['customer-last']
-        customer = ClubMember.objects.get(firstname=firstn, lastname=lastn)
-
-        tables = TTTable.objects.all()
-
+        tables = TTTable.objects.filter(tblType=tableNameValue)
         for table in tables:
-            if table.isReserved == True:
-                pass
-            else:
-                #tblLoc = table.tblLocation
+            if table.isReserved == False:
                 table.isReserved = True
                 table.save()
-                ttype = request.POST['table-type']
-                tblTime = request.POST['table-timings']
-                reservation = TTReservation.objects.create(customer=customer, tableName=table, resTime=tblTime)
-                reservation.save()
+                savedTable=table
                 break
 
-    return render(request, 'index.html', {
-        'members':ClubMember.objects.all(),
-        'reservations':TTReservation.objects.all()
-    })
+        # Creating the reservation
+        curRes = TTReservation.create(customer=user, tableName=savedTable, resDate=resDateValue, resTime=resTimeValue)
+        curRes.save()
+        print('Saved Reservation')
+        print(f'{TTReservation.objects.all()}')
+        context = {'form': form, 'message': 'Reservation Successful!'}
+        return render(request, 'tabletennis.html', context)
+    else:
+        context = {'form': form}
+        return render(request, 'tabletennis.html', context)
 
     return render(request, 'tabletennis.html')
 
@@ -78,9 +58,6 @@ def tennisView(request):
 def gymView(request):
     return render(request, 'gym.html')
 
-
-
-
   #Extras Views
 
 def feesView(request):
@@ -90,6 +67,25 @@ def logged(request):
     return render(request, 'thank.html')
 
 
+#Signup, Login and Logout Views
+
+"""def signupView(request):
+    if request.method=='POST':
+        first_name=request.POST['firstname']
+        last_name=request.POST['lastname']
+        email=request.POST['email']
+        DOB=request.POST['DOB']
+        password=request.POST['password1']
+        try:
+            user=User.objects.get(username=request.POST['username'])
+            return render(request, 'signup.html',{'error': 'Username already exists'})
+        except User.DoesNotExist:
+            user=User.objects.create_user(DOB, firstname, address, email, lastname,password,request.POST['username'])
+            auth.login(request,user)
+            return redirect('homepage.html')
+
+    else:
+        return render(request, 'signup.html')"""
 
 #Signup, Login and Logout Views
 
@@ -137,6 +133,7 @@ def signupView(request):
     else:
         context={'form':form}
         return render(request, 'signup.html',context)
+
 
     if request.POST['firstname'] and request.POST['lastname'] and request.POST['username'] and request.POST['birth_date'] and request.POST['address'] and request.POST['phone'] and request.post['password1']:
         member=Member()
