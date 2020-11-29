@@ -15,11 +15,7 @@
             <td width="700">
                 <form action="{% url 'signupView' %} " method="POST">
                     {% csrf_token %} {% if error %} {{error}} {% endif %} {{ form.as_p }}
-<<<<<<< HEAD
-                    <input type="submit" value="Sign Up">
-=======
                     <input type="submit" value="Sign Up" class="form class-control" />
->>>>>>> e72b882aa39a8bf6bf55f8812b617f791cde0eeb
 
                 </form>
 
