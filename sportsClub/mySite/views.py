@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from .models import *
 from .forms import *
@@ -67,25 +68,8 @@ def logged(request):
     return render(request, 'thank.html')
 
 
-#Signup, Login and Logout Views
 
-"""def signupView(request):
-    if request.method=='POST':
-        first_name=request.POST['firstname']
-        last_name=request.POST['lastname']
-        email=request.POST['email']
-        DOB=request.POST['DOB']
-        password=request.POST['password1']
-        try:
-            user=User.objects.get(username=request.POST['username'])
-            return render(request, 'signup.html',{'error': 'Username already exists'})
-        except User.DoesNotExist:
-            user=User.objects.create_user(DOB, firstname, address, email, lastname,password,request.POST['username'])
-            auth.login(request,user)
-            return redirect('homepage.html')
 
-    else:
-        return render(request, 'signup.html')"""
 
 #Signup, Login and Logout Views
 
@@ -133,7 +117,7 @@ def signupView(request):
                 fs.user= request.user
 
                 fs.save()
-                context= {'form': form}
+                context = {'form': form, 'error': 'Sign Up Successful!'}
                 return render(request, 'signup.html', context)
 
                
@@ -175,7 +159,7 @@ def loginView(request):
 
 def logoutView(request):
     if request.method=='POST':
-        auth.logout(request)
-        return redirect('thank.html')
+        logout(request)
+        
 
     return render(request, 'homepage.html')

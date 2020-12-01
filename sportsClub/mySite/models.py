@@ -22,7 +22,7 @@ class Member(models.Model):
     birth_date=models.DateField(verbose_name="YYYY-M-DD")
     email=models.EmailField(max_length=30)
     address=models.CharField(max_length=40)
-    phone=models.IntegerField()
+    phone=models.CharField(max_length=10)
 
 class login(models.Model):
     username=models.CharField(max_length=25)

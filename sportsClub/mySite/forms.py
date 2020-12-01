@@ -7,7 +7,7 @@ class signupForm(forms.ModelForm):
     lastname = forms.CharField(label='Last Name')
     birth_date=forms.DateField(label=' Date of Birth')
     email=forms.EmailField(label='Email ID')
-    phone=forms.IntegerField(label='Phone Number')
+    phone=forms.CharField(label='Phone Number')
     address=forms.CharField(label='Address')
     password1=forms.CharField(label='Password')
     password2=forms.CharField(label='Confirm Password')
