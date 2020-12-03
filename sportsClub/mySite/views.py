@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
+from django.core.exceptions import ObjectDoesNotExist
+from datetime import timedelta, datetime
+from django.utils import timezone
 from .models import *
 from .forms import *
 
@@ -13,52 +17,193 @@ def homepageView(request):
     return render(request, 'homepage.html')
 
 
-    #Sports Views
+#Sports Views
 
 def tabletennisView(request):
+    tables = TTTable.objects.all()
+    print(tables)
+    for table in tables:
+        if table.isReserved == True:
+            print(table)
+            try:
+                curRes = TTReservation.objects.filter(tableName=table).first()
+                print(curRes)
+                curTime = curRes.resTime
+                curDate = curRes.resDate
+                delta = timedelta(hours=1)
+                addedTime = (datetime.combine(curDate, curTime)+delta)
+
+                if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
+                    table.isReserved = False
+                    table.save()
+                    curRes.delete()
+            except ObjectDoesNotExist:
+                pass
+
     form=tabletennisForm(request.user, request.POST)
     if form.is_valid():
         fs=form.save(commit=False)
-        # user = user.get
         tableNameValue = form.cleaned_data.get('tablename')
-        resTimeValue=form.cleaned_data.get('restime')
+        resTimeValue = form.cleaned_data.get('restime')
         resDateValue=form.cleaned_data.get('resdate')
-
-
         tables = TTTable.objects.filter(tblType=tableNameValue)
         for table in tables:
             if table.isReserved == False:
                 table.isReserved = True
                 table.save()
-                savedTable=table
-                break
-
-        # Creating the reservation
-        curRes = TTReservation.create(customer=user, tableName=savedTable, resDate=resDateValue, resTime=resTimeValue)
-        curRes.save()
-        print('Saved Reservation')
-        print(f'{TTReservation.objects.all()}')
-        context = {'form': form, 'message': 'Reservation Successful!'}
-        return render(request, 'tabletennis.html', context)
+                # Creating the reservation
+                curUser = User.objects.get(username=f'{request.user}')
+                curRes = TTReservation(customer=curUser, tableName=table, resTime=f'{resTimeValue}', resDate=f'{resDateValue}')
+                curRes.save()
+                context = {'form': form, 'message': 'Reservation Successful!'}
+                return render(request, 'tabletennis.html', context)
     else:
         context = {'form': form}
         return render(request, 'tabletennis.html', context)
-    context = {'form': form}
-    return render(request, 'tabletennis.html', context)
 
 def badmintonView(request):
-    return render(request, 'badminton.html')
+    courts = BTCourt.objects.all()
+    print(courts)
+    for court in courts:
+        if court.isReserved == True:
+            print(court)
+            try:
+                curRes = BTReservation.objects.filter(BTCourtName=court).first()
+                print('in try', curRes)
+                if curRes is not None:
+                    print(curRes, 'is not none')
+                    curTime = curRes.BTresTime
+                    print(curTime)
+                    curDate = curRes.BTresDate
+                    print(curDate)
+                    delta = timedelta(hours=1)
+                    addedTime = (datetime.combine(curDate, curTime)+delta)
+
+                    if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
+                        court.isReserved = False
+                        court.save()
+                        curRes.delete()
+                else:
+                    pass
+            except ObjectDoesNotExist:
+                pass
+
+    form=badmintonForm(request.user, request.POST)
+    if form.is_valid():
+        fs=form.save(commit=False)
+        courtNameValue = form.cleaned_data.get('btcourtname')
+        resTimeValue = form.cleaned_data.get('btrestime')
+        print(f'restimevalue {resTimeValue}')
+        resDateValue=form.cleaned_data.get('btresdate')
+        print(f'resdimevalue {resDateValue}')
+        courts = BTCourt.objects.filter(BTcourtLocation=courtNameValue)
+        for court in courts:
+            print('entered')
+            if court.isReserved == False:
+                court.isReserved = True
+                court.save()
+                print('saved court reserve')
+                # Creating the reservation
+                print('creating reservation:')
+                curUser = User.objects.get(username=f'{request.user}')
+                curRes = BTReservation(customer=curUser, BTCourtName=court, BTresTime=f'{resTimeValue}', BTresDate=f'{resDateValue}')
+                print(f'Curres {curRes}')
+                curRes.save()
+                context = {'form': form, 'message': 'Reservation Successful!'}
+                return render(request, 'badminton.html', context)
+    else:
+        context = {'form': form}
+        return render(request, 'badminton.html', context)
 
 def squashView(request):
-    return render(request, 'squash.html')
+    courts = SCourt.objects.all()
+    for court in courts:
+        if court.isReserved == True:
+            try:
+                curRes = SReservation.objects.filter(SCourtName=court).first()
+                if curRes is not None:
+                    curTime = curRes.SresTime
+                    curDate = curRes.SresDate
+                    delta = timedelta(hours=1)
+                    addedTime = (datetime.combine(curDate, curTime)+delta)
+
+                    if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
+                        court.isReserved = False
+                        court.save()
+                        curRes.delete()
+                else:
+                    pass
+            except ObjectDoesNotExist:
+                pass
+
+    form=squashForm(request.user, request.POST)
+    if form.is_valid():
+        fs=form.save(commit=False)
+        courtNameValue = form.cleaned_data.get('scourtname')
+        resTimeValue = form.cleaned_data.get('srestime')
+        resDateValue=form.cleaned_data.get('sresdate')
+        courts = SCourt.objects.all()
+        for court in courts:
+            if court.isReserved == False:
+                court.isReserved = True
+                court.save()
+                # Creating the reservation
+                curUser = User.objects.get(username=f'{request.user}')
+                curRes = SReservation(customer=curUser, SCourtName=court, SresTime=f'{resTimeValue}', SresDate=f'{resDateValue}')
+                curRes.save()
+                context = {'form': form, 'message': 'Reservation Successful!'}
+                return render(request, 'squash.html', context)
+    else:
+        context = {'form': form}
+        return render(request, 'squash.html', context)
 
 def tennisView(request):
-    return render(request, 'tennis.html')
+    courts = TCourt.objects.all()
+    for court in courts:
+        if court.isReserved == True:
+            try:
+                curRes = TReservation.objects.filter(TCourtName=court).first()
+                if curRes is not None:
+                    curTime = curRes.TresTime
+                    curDate = curRes.TresDate
+                    delta = timedelta(hours=1)
+                    addedTime = (datetime.combine(curDate, curTime)+delta)
+
+                    if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
+                        court.isReserved = False
+                        court.save()
+                        curRes.delete()
+                else:
+                    pass
+            except ObjectDoesNotExist:
+                pass
+
+    form=tennisForm(request.user, request.POST)
+    if form.is_valid():
+        fs=form.save(commit=False)
+        courtNameValue = form.cleaned_data.get('tcourtname')
+        resTimeValue = form.cleaned_data.get('trestime')
+        resDateValue=form.cleaned_data.get('tresdate')
+        courts = TCourt.objects.filter(TcourtLocation=courtNameValue)
+        for court in courts:
+            if court.isReserved == False:
+                court.isReserved = True
+                court.save()
+                # Creating the reservation
+                curUser = User.objects.get(username=f'{request.user}')
+                curRes = TReservation(customer=curUser, TCourtName=court, TresTime=f'{resTimeValue}', TresDate=f'{resDateValue}')
+                curRes.save()
+                context = {'form': form, 'message': 'Reservation Successful!'}
+                return render(request, 'tennis.html', context)
+    else:
+        context = {'form': form}
+        return render(request, 'tennis.html', context)
 
 def gymView(request):
     return render(request, 'gym.html')
 
-  #Extras Views
+
+#Extras Views
 
 def feesView(request):
     return render(request, 'fees.html')
@@ -115,14 +260,10 @@ def signupView(request):
             except User.DoesNotExist:
                 user=User.objects.create_user(uservalue,password= password1value,email=emailvalue, first_name=firstname, last_name=lastname)
                 user.save()
-
-
                 login(request,user)
-
                 fs.user= request.user
-
                 fs.save()
-                context= {'form': form}
+                context= {'form': form, message: 'Congratulations! You have been registered.'}
                 return render(request, 'signup.html', context)
 
 
@@ -146,8 +287,6 @@ def signupView(request):
         member.password=request.POST['password1']
     else:
         return render(request, 'signup.html', {'error':'Please try againn'})
-
-
 
 def loginView(request):
     uservalue=''

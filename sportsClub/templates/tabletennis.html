@@ -1,13 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="pagetitle"><b>Table Tennis</b></div>
-<br><br>
+
+<font color="pink" size="6">
+    <center> <b><u>{% if message %} {{ message }} {% endif %}</u></b></center>
+</font>
+
+<br>
 <p align="center">
     <font size="4" style="font-style: oblique;" face="Georgia"> Table Tennis is a popular sport for ages 8-15<br> We have both kids and adult tables located on both first and second floors.
     </font>
 </p>
 
-<br><br><br>
+<br><br>
 <font size="5">
     <font color="pink" size="6">
         <center> <b><u>Timings</u></b></center>
@@ -34,11 +39,12 @@
     <center><b><u>Reserve A Table</u></b> </center>
 </font>
 
+<br>
 <table align="center" border="3px">
     <tr>
         {% if request.user.is_authenticated %}
-        <td width="700">
-            {{ message }}
+        <td width="700" style='vertical-align: middle; text-align: center; padding:20px;'>
+
             <form action="{% url 'tabletennisView' %} " method="POST">
                 {% csrf_token %}
                 {% if error %}    {{error}}       {% endif %}
@@ -47,8 +53,8 @@
             </form>
         </td>
         {% else %}
-        <td style='vertical-align: middle; text-align: center'>
-          Please <a href="{% url 'signupView' %}">login</a> to reserve a table.
+        <td style='vertical-align: middle; text-align: center; padding:20px;'>
+          Please <a href="{% url 'signupView' %}">sign up</a> or <a href="{% url 'loginView' %}">login</a> to reserve a table.
         </td>
         {% endif %}
     </tr>

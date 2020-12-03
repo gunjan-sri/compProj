@@ -13,6 +13,7 @@
 
         <tr>
             <td width="700">
+                {% if message %} {{ message }}  {% endif %}
                 <form action="{% url 'signupView' %} " method="POST">
                     {% csrf_token %} {% if error %} {{error}} {% endif %} {{ form.as_p }}
                     <input type="submit" value="Sign Up" class="form class-control" />
