@@ -4,6 +4,7 @@
     -webkit-text-stroke: 1px whitesmoke;
     background-color: black;
 }
+
 .sportdescription {
     font-size: 4px;
     font-style: oblique;
@@ -18,32 +19,6 @@
 .sports {
     color: pink;
     font-size: 6vw;
-}
-
-.gymtitle {
-    font-size: 50px;
-    -webkit-text-stroke: 1px #FF9666;
-}
-
-.gymhead {
-    color: black;
-    font-family: Georgia;
-    font-size: 20px;
-    text-align: left;
-    font-weight: bold;
-}
-
-.gymtimings {
-    color: black;
-    font-family: Georgia;
-    font-style: italic;
-    text-align: center;
-    width: 300px;
-    border: 5px solid black;
-    padding: 50px;
-    margin: 20px;
-    font-weight: bold;
-    border-style: inset;
 }
 
 .homepara {

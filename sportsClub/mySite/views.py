@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.core.exceptions import ObjectDoesNotExist
 from datetime import timedelta, datetime
@@ -18,7 +19,6 @@ def homepageView(request):
 
 
 #Sports Views
-
 def tabletennisView(request):
     tables = TTTable.objects.all()
     print(tables)
@@ -202,39 +202,14 @@ def tennisView(request):
 def gymView(request):
     return render(request, 'gym.html')
 
-
 #Extras Views
-
 def feesView(request):
     return render(request, 'fees.html')
 
 def logged(request):
     return render(request, 'thank.html')
 
-
 #Signup, Login and Logout Views
-
-"""def signupView(request):
-    if request.method=='POST':
-        first_name=request.POST['firstname']
-        last_name=request.POST['lastname']
-        email=request.POST['email']
-        DOB=request.POST['DOB']
-        password=request.POST['password1']
-        try:
-            user=User.objects.get(username=request.POST['username'])
-            return render(request, 'signup.html',{'error': 'Username already exists'})
-        except User.DoesNotExist:
-            user=User.objects.create_user(DOB, firstname, address, email, lastname,password,request.POST['username'])
-            auth.login(request,user)
-            return redirect('homepage.html')
-
-    else:
-        return render(request, 'signup.html')"""
-
-#Signup, Login and Logout Views
-
-
 def signupView(request):
     firstname=''
     lastname=''
@@ -263,30 +238,14 @@ def signupView(request):
                 login(request,user)
                 fs.user= request.user
                 fs.save()
-                context= {'form': form, message: 'Congratulations! You have been registered.'}
+                context = {'form': form, 'error': 'Sign Up Successful!'}
                 return render(request, 'signup.html', context)
-
-
         else:
             context={'form':form,'error':'The passwords that you provided do not match'}
             return render(request, 'signup.html',context)
-
     else:
         context={'form':form}
         return render(request, 'signup.html',context)
-
-
-    if request.POST['firstname'] and request.POST['lastname'] and request.POST['username'] and request.POST['birth_date'] and request.POST['address'] and request.POST['phone'] and request.post['password1']:
-        member=Member()
-        member.firstname=request.POST['firstname']
-        member.lastname=request.POST['lastname']
-        member.birth_date=request.POST['birth_date']
-        member.username=request.POST['username']
-        member.address=request.POST['address']
-        member.phone=request.POST['phone']
-        member.password=request.POST['password1']
-    else:
-        return render(request, 'signup.html', {'error':'Please try againn'})
 
 def loginView(request):
     uservalue=''
@@ -310,7 +269,5 @@ def loginView(request):
 
 def logoutView(request):
     if request.method=='POST':
-        auth.logout(request)
-        return redirect('thank.html')
-
+        logout(request)
     return render(request, 'homepage.html')
