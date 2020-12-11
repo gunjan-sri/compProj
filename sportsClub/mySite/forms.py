@@ -86,8 +86,8 @@ class tennisForm(forms.ModelForm):
          super(tennisForm, self).__init__(*args, **kwargs)
 
 class squashForm(forms.ModelForm):
-    LOCS = [('1', 'Floor 1'), ('2', 'Floor 2')]
-    scourtname = forms.ChoiceField(choices=LOCS, label='Choose the floor')
+    # LOCS = [('1', 'Floor 1'), ('2', 'Floor 2')]
+    # scourtname = forms.ChoiceField(choices=LOCS, label='Choose the floor')
     sresdate = forms.DateField(label='Reservation Date', widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}))
     srestime = forms.ChoiceField(choices=T_TIMINGS, label="Reservation Timing")
 
