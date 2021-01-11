@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib import auth
+from datetime import timedelta, datetime
+from django.utils import timezone
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.core.exceptions import ObjectDoesNotExist
-from datetime import timedelta, datetime
-from django.utils import timezone
 from .models import *
 from .forms import *
 
@@ -17,26 +17,22 @@ from .forms import *
 def homepageView(request):
     return render(request, 'homepage.html')
 
-
 #Sports Views
 def tabletennisView(request):
     tables = TTTable.objects.all()
-    print(tables)
     for table in tables:
         if table.isReserved == True:
-            print(table)
             try:
                 curRes = TTReservation.objects.filter(tableName=table).first()
-                print(curRes)
-                curTime = curRes.resTime
-                curDate = curRes.resDate
-                delta = timedelta(hours=1)
-                addedTime = (datetime.combine(curDate, curTime)+delta)
-
-                if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
-                    table.isReserved = False
-                    table.save()
-                    curRes.delete()
+                if curRes is not None:
+                    curTime = curRes.resTime
+                    curDate = curRes.resDate
+                    delta = timedelta(hours=1)
+                    addedTime = (datetime.combine(curDate, curTime)+delta)
+                    if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
+                        table.isReserved = False
+                        table.save()
+                        curRes.delete()
             except ObjectDoesNotExist:
                 pass
 
@@ -63,22 +59,15 @@ def tabletennisView(request):
 
 def badmintonView(request):
     courts = BTCourt.objects.all()
-    print(courts)
     for court in courts:
         if court.isReserved == True:
-            print(court)
             try:
                 curRes = BTReservation.objects.filter(BTCourtName=court).first()
-                print('in try', curRes)
                 if curRes is not None:
-                    print(curRes, 'is not none')
                     curTime = curRes.BTresTime
-                    print(curTime)
                     curDate = curRes.BTresDate
-                    print(curDate)
                     delta = timedelta(hours=1)
                     addedTime = (datetime.combine(curDate, curTime)+delta)
-
                     if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
                         court.isReserved = False
                         court.save()
@@ -93,21 +82,15 @@ def badmintonView(request):
         fs=form.save(commit=False)
         courtNameValue = form.cleaned_data.get('btcourtname')
         resTimeValue = form.cleaned_data.get('btrestime')
-        print(f'restimevalue {resTimeValue}')
         resDateValue=form.cleaned_data.get('btresdate')
-        print(f'resdimevalue {resDateValue}')
         courts = BTCourt.objects.filter(BTcourtLocation=courtNameValue)
         for court in courts:
-            print('entered')
             if court.isReserved == False:
                 court.isReserved = True
                 court.save()
-                print('saved court reserve')
                 # Creating the reservation
-                print('creating reservation:')
                 curUser = User.objects.get(username=f'{request.user}')
                 curRes = BTReservation(customer=curUser, BTCourtName=court, BTresTime=f'{resTimeValue}', BTresDate=f'{resDateValue}')
-                print(f'Curres {curRes}')
                 curRes.save()
                 context = {'form': form, 'message': 'Reservation Successful!'}
                 return render(request, 'badminton.html', context)
@@ -124,10 +107,16 @@ def squashView(request):
                 if curRes is not None:
                     curTime = curRes.SresTime
                     curDate = curRes.SresDate
-                    delta = timedelta(hours=1)
-                    addedTime = (datetime.combine(curDate, curTime)+delta)
 
-                    if (timezone.now().date() >= curDate) and (timezone.now().time() >= addedTime.time()):
+                    tim = timezone.now()
+                    delta = timedelta(hours=1)
+
+                    timd = datetime.combine(tim.date(), tim.time()) # Timezone becomes naive datetime
+                    addedTime = datetime.combine(curDate, curTime) + delta
+
+                    condition = (timd.date() >= addedTime.date()) and (timd.time() >= addedTime.time())
+
+                    if condition:
                         court.isReserved = False
                         court.save()
                         curRes.delete()
@@ -137,25 +126,51 @@ def squashView(request):
                 pass
 
     form=squashForm(request.user, request.POST)
-    if form.is_valid():
-        fs=form.save(commit=False)
-        courtNameValue = form.cleaned_data.get('scourtname')
-        resTimeValue = form.cleaned_data.get('srestime')
-        resDateValue=form.cleaned_data.get('sresdate')
-        courts = SCourt.objects.all()
-        for court in courts:
-            if court.isReserved == False:
-                court.isReserved = True
-                court.save()
-                # Creating the reservation
-                curUser = User.objects.get(username=f'{request.user}')
-                curRes = SReservation(customer=curUser, SCourtName=court, SresTime=f'{resTimeValue}', SresDate=f'{resDateValue}')
-                curRes.save()
-                context = {'form': form, 'message': 'Reservation Successful!'}
+    if request.method == 'POST':
+        if form.is_valid():
+            fs=form.save(commit=False)
+            # courtNameValue = form.cleaned_data.get('scourtname')
+            resTimeValue = form.cleaned_data.get('srestime')
+            resDateValue = form.cleaned_data.get('sresdate')
+            courts = SCourt.objects.all()
+            for court in courts:
+                if court.isReserved == False:
+                    court.isReserved = True
+                    court.save()
+                    # Creating the reservation
+                    curUser = User.objects.get(username=f'{request.user}')
+                    curRes = SReservation(customer=curUser, SCourtName=court, SresTime=f'{resTimeValue}', SresDate=f'{resDateValue}')
+                    curRes.save()
+                    context = {'form': form, 'message': 'Reservation Successful!'}
+                    try:
+                        print('*************************   here   *************************')
+                        return render(request, 'squash.html', context)
+                    except ValueError:
+                        print('*************************  actually here  *************************')
+                        return render(request, 'squash.html', {
+                            'form':form,
+                            'message': 'There are no courts available.'
+                        })
+        else:
+            try:
+                print('*************************    well actually here  *************************')
+                context = {'form': form}
                 return render(request, 'squash.html', context)
+            except ValueError:
+                print('*************************  actually here 2 *************************')
+                return render(request, 'squash.html', {
+                    'form':form,
+                    'message': 'There are no courts available.'
+                })
     else:
+        print('*************************    well actually actually here  *************************')
         context = {'form': form}
-        return render(request, 'squash.html', context)
+        #return render(request, 'squash.html', context)
+        return HttpResponseRedirect(reverse('nocourtView'))
+
+
+# ValueError at /mySite/squash/
+# The view mySite.views.squashView didn't return an HttpResponse object. It returned None instead.
 
 def tennisView(request):
     courts = TCourt.objects.all()
