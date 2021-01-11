@@ -231,7 +231,7 @@ def signupView(request):
             try:
                 user=User.objects.get(username=uservalue)
                 context={'form':form, 'error':'The username you entered has already been taken'}
-                return render(request, 'signup.html')
+                return render(request, 'signup.html', context)
             except User.DoesNotExist:
                 user=User.objects.create_user(uservalue,password= password1value,email=emailvalue, first_name=firstname, last_name=lastname)
                 user.save()
