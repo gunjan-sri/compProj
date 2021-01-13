@@ -86,8 +86,8 @@ def badmintonView(request):
             try:
                 curRes = BTReservation.objects.filter(BTCourtName=court).first()
                 if curRes is not None:
-                    curTime = curRes.SresTime
-                    curDate = curRes.SresDate
+                    curTime = curRes.BTresTime
+                    curDate = curRes.BTresDate
 
                     tim = timezone.now()
                     delta = timedelta(hours=1)
