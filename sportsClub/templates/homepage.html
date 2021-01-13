@@ -1,5 +1,4 @@
-{% extends 'base.html' %} {% block content %}
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
@@ -46,7 +45,7 @@
                 <img src="{% static 'tb1.jpg' %}" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">Table Tennis</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text"> Look into Table Tennis by clicking the button below!</p>
                     <a href="{% url 'tabletennisView' %}" class="btn btn-primary">Go</a>
                 </div>
             </div>
@@ -56,7 +55,7 @@
                 <img src="{% static 'squash2.jpg' %}" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">Squash</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Look into Squash by clicking the button below!</p>
                     <a href="{% url 'squashView' %}" class="btn btn-primary">Go</a>
                 </div>
             </div>
@@ -66,7 +65,7 @@
                 <img src="{% static 'tennis3.jpg' %}" class="card-img-top" height="190">
                 <div class="card-body">
                     <h5 class="card-title">Tennis</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Look into Tennis by clicking the button below!</p>
                     <a href="{% url 'tennisView' %}" class="btn btn-primary">Go</a>
                 </div>
             </div>
@@ -76,7 +75,7 @@
                 <img src="{% static 'b1.jpg' %}" class="card-img-top" height="190">
                 <div class="card-body">
                     <h5 class="card-title">Badminton</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">Look into Badminton by clicking the button below!</p>
                     <a href="{% url 'badmintonView' %}" class="btn btn-primary">Go </a>
                 </div>
             </div>
