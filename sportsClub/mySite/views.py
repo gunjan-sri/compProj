@@ -253,8 +253,7 @@ def gymView(request):
 def feesView(request):
     return render(request, 'fees.html')
 
-def logged(request):
-    return render(request, 'thank.html')
+#
 
 #Signup, Login and Logout Views
 def signupView(request):
