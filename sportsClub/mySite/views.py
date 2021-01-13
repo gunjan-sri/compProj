@@ -26,8 +26,8 @@ def tabletennisView(request):
             try:
                 curRes = TTReservation.objects.filter(tableName=table).first()
                 if curRes is not None:
-                    curTime = curRes.SresTime
-                    curDate = curRes.SresDate
+                    curTime = curRes.resTime
+                    curDate = curRes.resDate
 
                     tim = timezone.now()
                     delta = timedelta(hours=1)
